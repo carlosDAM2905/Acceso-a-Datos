@@ -1,4 +1,4 @@
-package manejo.de.ficheros;
+package manejo.de.ficheros.ejercicios.power.point.manejo.ficheros.ejercicio1;
 
 import java.io.*;
 import java.util.Scanner;
@@ -6,12 +6,7 @@ import java.util.Scanner;
 public class Ejercicio01 {
     public static void main(String[] args) {
 
-        /*
-        Crea un fichero en Java que cree un fichero de texto
-        llamado miFichero.txt en la ruta que especifiques
-         */
-
-        String ruta = "C:\\Users\\wicar\\Desktop\\DAM\\SEGUNDO\\ACCESO A DATOS\\Ejercicio crear fichero\\miFichero.txt";
+        String ruta = "src/manejo/de/ficheros/ejercicios/power/point/manejo/ficheros/ejercicio1/miFichero.txt";
 
         File fichero = new File(ruta);
 

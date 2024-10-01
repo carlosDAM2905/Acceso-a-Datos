@@ -1,4 +1,4 @@
-package manejo.de.ficheros;
+package manejo.de.ficheros.ejercicios.power.point.manejo.ficheros.ejercicio2;
 
 import java.io.*;
 import java.util.Arrays;
@@ -81,7 +81,7 @@ public class Ejercicio2 {
     public static void crearDirectorio() {
 
         System.out.println("Introduce nombre del directorio para crearlo");
-        String ruta = "src/File/Ejercicios/" + teclado.nextLine();
+        String ruta = "src/manejo/de/ficheros/ejercicios/power/point/manejo/ficheros/ejercicio2/" + teclado.nextLine();
 
         File nuevoDirectorio = new File(ruta);
 
@@ -103,8 +103,8 @@ public class Ejercicio2 {
 
     public static void crearFichero() {
         System.out.println("Introduce ruta del fichero");
-        String nombreFichero = teclado.nextLine();
-        String ruta = "src/File/Ejercicios/" + nombreFichero;
+        String ruta = "src/manejo/de/ficheros/ejercicios/power/point/manejo/ficheros/ejercicio2/" + teclado.nextLine();
+
 
         File fichero = new File(ruta);
 
@@ -124,7 +124,7 @@ public class Ejercicio2 {
     public static void borrarFichero() {
         System.out.println("Introduce el nombre del fichero que quieres borrar ");
 
-        String ruta = "src/File/Ejercicios/" + teclado.nextLine();
+        String ruta = "src/manejo/de/ficheros/ejercicios/power/point/manejo/ficheros/ejercicio2/" + teclado.nextLine();
 
         File fichero = new File(ruta);
 
@@ -145,7 +145,7 @@ public class Ejercicio2 {
 
     public static void borrarDirectorio() {
         System.out.println("Introduce nombre del directorio que quieras borrar");
-        String ruta = "src/File/Ejercicios/" + teclado.nextLine();
+        String ruta = "src/manejo/de/ficheros/ejercicios/power/point/manejo/ficheros/ejercicio2/" + teclado.nextLine();
 
         File directorio = new File(ruta);
 
@@ -188,7 +188,7 @@ public class Ejercicio2 {
 
     public static void mostrarContenido() {
         System.out.println("Introduce nombre del directorio que quieras mostrar");
-        String ruta = "src/File/Ejercicios/" + teclado.nextLine();
+        String ruta = "src/manejo/de/ficheros/ejercicios/power/point/manejo/ficheros/ejercicio2/" + teclado.nextLine();
         File directorio = new File(ruta);
 
         if (directorio.exists() && directorio.isDirectory()) {
@@ -220,7 +220,7 @@ public class Ejercicio2 {
 
         System.out.println("en que fichero quieres escribir:");
 
-        String ruta = "src/File/Ejercicios/" + teclado.nextLine();
+        String ruta = "src/manejo/de/ficheros/ejercicios/power/point/manejo/ficheros/ejercicio2/" + teclado.nextLine();
 
         File fichero = new File(ruta);
 
@@ -244,7 +244,7 @@ public class Ejercicio2 {
 
     public static void leerFichero() {
         System.out.println("¿Que fichero quieres leer?");
-        String ruta = "src/File/Ejercicios/" + teclado.nextLine();
+        String ruta = "src/manejo/de/ficheros/ejercicios/power/point/manejo/ficheros/ejercicio2/" + teclado.nextLine();
 
         File fichero = new File(ruta);
 
@@ -269,7 +269,7 @@ public class Ejercicio2 {
 
     public static void abrirBlocDeNotas() {
         System.out.println("¿Qué fichero quieres abrir?");
-        String ruta = "src/File/Ejercicios/" + teclado.nextLine();
+        String ruta = "src/manejo/de/ficheros/ejercicios/power/point/manejo/ficheros/ejercicio2/" + teclado.nextLine();
 
         File fichero = new File(ruta);
 
