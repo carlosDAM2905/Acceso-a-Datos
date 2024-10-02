@@ -5,10 +5,6 @@ import java.io.*;
 public class Ejercicio2 {
     public static void main(String[] args) {
 
-        /*
-        Partiendo del fichero de csv de ejemplo, crear un programa de Java que muestre los
-        datos de todos aquellos restaurantes cuyo código postal empiece por 6.
-         */
 
         String ruta = "src/manejodeficheros/ejerciciosaula/ejercicio2/Restaurantes.csv";
 

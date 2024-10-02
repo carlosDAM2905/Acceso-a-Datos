@@ -5,16 +5,7 @@ import java.util.Scanner;
 
 public class Ejercicio1 {
     public static void main(String[] args) {
-        /*
-            Escribir un programa en Java que para cualquier ruta indicada por el usuario,
-muestre:
- Si el fichero existe o no
- Si se trata de un directorio o de un fichero
- En caso de ser un fichero, debe mostrar los siguientes datos:
-o Nombre
-o Tamaño
-o Permisos de lectura y escritura
-         */
+
 
         System.out.println("Escribe el nombre del fichero");
         Scanner teclado = new Scanner(System.in);

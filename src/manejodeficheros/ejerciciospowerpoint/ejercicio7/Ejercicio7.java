@@ -1,76 +1,132 @@
 package manejodeficheros.ejerciciospowerpoint.ejercicio7;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
 public class Ejercicio7 {
     public static void main(String[] args) {
 
-        String[] apellidos = {"Gomez", "Sanchez", "Garcia", "Cordoba"}; //array con los apellidos
+        String[] apellidos = {"Gómez", "Sánchez", "Córdoba", "Jimenez", "Lozano", "Martinez"};
 
-        int[] departamento = {20, 30, 40, 50}; //array con los departamentos
+        int[] departamentos = {10, 20, 30, 40, 50, 60};
 
-        double[] salario = {1300, 1400.50, 1500, 1600.80}; //array con los salarios
+        double[] salario = {1100.50, 1400.60, 1870.35, 2120.90, 1754.35, 3480.65};
 
-        try (RandomAccessFile fichero = new RandomAccessFile("src/manejodeficheros/ejerciciospowerpoint/ejercicio7/empleados.dat", "rw")) {
+        // Escribimos el fichero llamando al método escribirFichero()
+        escribirFichero(apellidos,departamentos,salario);
+
+        // INSERTAR EMPLEADOS:
+        insertarEmpleado("Perez", 70, 1920.80);
+        insertarEmpleado("Ramirez", 80, 2000);
+
+        // SI QUEREMOS VER TODOS LOS REGISTROS:
+        mostrarEmpleados();
+
+        //SI QUEREMOS LEER UN REGISTRO EN CONCRETO, LLAMAMOS AL MÉTODO leerRegistro() E INTRODUCIMOS EL ID DE EMPLEADO QUE QUEREMOS VER, POR EJEMPLO EL 3:
+        leerRegistro(idEmpleado(3));
+
+    }
+    public static void escribirFichero(String[] apellidos, int[] departamentos, double[] salarios) {
+
+        try(RandomAccessFile fichero = new RandomAccessFile("src/manejodeficheros/ejerciciospowerpoint/ejercicio7/empleados.dat", "rw")) {
 
             for (int i = 0; i < apellidos.length; i++) {
+                fichero.writeInt(i + 1);
 
-                fichero.writeInt(i + 1); //escribimos el identificador
+                String apellido = apellidos[i];
 
-                String apellido = String.format("%-10s", apellidos[i]).substring(0, 10); //formateamos los apellidos para que tengan 10 caracteres siempre
+                if (apellido.length() > 10) {
+                    apellido = apellido.substring(0,10);
+                } else {
+                    apellido = String.format("%-10s", apellido);
+                }
 
-                fichero.writeChars(apellido); // y escribimos los apellidos
+                fichero.writeChars(apellido);
 
-                fichero.writeInt(departamento[i]); //esribimos los departamentos de cada empleado
+                fichero.writeInt(departamentos[i]);
 
-                fichero.writeDouble(salario[i]); // escribimos los salarios
+                fichero.writeDouble(salarios[i]);
+
             }
 
             System.out.println("Fichero creado con éxito");
-            
+
         } catch (IOException e) {
-            System.out.println("Error " + e.getMessage());
+            System.out.println("Error de escritura " + e.getMessage());
         }
-
-
-        // leer el archivo:
-
+    }
+    public static void leerRegistro(int registro) {
         try (RandomAccessFile fichero = new RandomAccessFile("src/manejodeficheros/ejerciciospowerpoint/ejercicio7/empleados.dat", "r")) {
 
-            while (fichero.getFilePointer() < fichero.length()) {
-                //leer el identificador:
-                int id = fichero.readInt();
+            fichero.seek(registro);
 
-                //leer el apellido:
-                String apellido = "";
+            int id = fichero.readInt();
 
-                for (int i = 0; i < 10; i++) {
-                    apellido += fichero.readChar();
-                }
-
-                //leer el departamento:
-                int departamentoLeido = fichero.readInt();
-
-                //leer el salario
-                double salarioLeido = fichero.readDouble();
-
-                // mostrar los datos leidos:
-
-                System.out.println("ID: " + id);
-                System.out.println("Apellido: " + apellido.trim()); // Trim para eliminar espacios en blanco adicionales
-                System.out.println("Departamento: " + departamentoLeido); // Usamos la nueva variable para mostrar el departamento
-                System.out.println("Salario: " + salarioLeido);
-                System.out.println("---------------------------");
+            String apellido = "";
+            for (int i = 0; i < 10; i++) {
+                apellido += fichero.readChar();
             }
+            int departamento = fichero.readInt();
+            double salario = fichero.readDouble();
 
+            System.out.println("\n===================\nDatos del empleado: \n===================");
+            System.out.println("ID: " + id);
+            System.out.println("Apellido: " + apellido);
+            System.out.println("Departamento: " + departamento);
+            System.out.println("Salario: " + salario);
 
         } catch (IOException e) {
             System.out.println("Error al leer el archivo " + e.getMessage());
         }
+    }
+    public static int idEmpleado(int idEmpleado) {
+        int bytesPorRegistro = 36;
+        return (idEmpleado - 1) * bytesPorRegistro;
+    }
+    public static void insertarEmpleado(String apellido, int departamento, double salario) {
+
+        try (RandomAccessFile fichero = new RandomAccessFile("src/manejodeficheros/ejerciciospowerpoint/ejercicio7/empleados.dat", "rw")) {
 
 
+            long tamañoFichero = fichero.length();
 
+            fichero.seek(tamañoFichero);
+
+            int id = (int) ((tamañoFichero / 36) + 1);
+            fichero.writeInt(id);
+
+            if (apellido.length() > 10) {
+                apellido = apellido.substring(0, 10);
+            } else {
+                apellido = String.format("%-10s",apellido);
+            }
+            fichero.writeChars(apellido);
+
+            fichero.writeInt(departamento);
+
+            fichero.writeDouble(salario);
+
+
+        } catch (IOException e) {
+            System.out.println("Error al insertar empleado " + e.getMessage());
+        }
+    }
+    public static void mostrarEmpleados() {
+
+        try (RandomAccessFile fichero = new RandomAccessFile("src/manejodeficheros/ejerciciospowerpoint/ejercicio7/empleados.dat", "r")) {
+
+            int numeroEmpleados = (int) (fichero.length() / 36);
+
+            for (int i = 1; i <= numeroEmpleados; i++) {
+                leerRegistro((i - 1) * 36);
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("No se encuentra el fichero " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Error al mostrar empleados " + e.getMessage());
+        }
 
     }
 }
