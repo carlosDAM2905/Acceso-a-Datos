@@ -2,7 +2,6 @@ package manejodeficheros.practica01;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -18,16 +17,18 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
 
-        String ruta1 = "src/CONCIERTOS.csv";
+        String ruta1 = "src/manejodeficheros/practica01/CONCIERTOS.csv";
         String ruta2 = "src/CONCIERTOS.txt";
         String ruta3 = "src/CONCIERTOS.aleatorio";
         String ruta4 = "src/CONCIERTOS.bin";
         String ruta5 = "src/CONCIERTOS.xml";
 
+
         ejercicio1(ruta1, ruta2);
-        ejercicio2(ruta1, ruta3, 6);
+        ejercicio2(ruta1, ruta3, 5);
         ejercicio3(ruta1, ruta4);
         ejercicio4(ruta4, ruta5);
+
 
     }
     public static void ejercicio1(String ruta1, String ruta2) {
@@ -74,10 +75,12 @@ public class Main {
                 String campo2 = String.format("%-30s", campos[2]);
                 String campo3 = String.format("%-10s", campos[3]);
 
+
                 raf.writeBytes(campo0);
                 raf.writeBytes(campo1);
                 raf.writeBytes(campo2);
                 raf.writeBytes(campo3);
+
 
             }
 
@@ -89,7 +92,6 @@ public class Main {
             byte[] bytes = new byte[bytesPorRegistro];
 
             int bytesLeidos = raf.read(bytes);
-
 
             if (bytesLeidos == bytesPorRegistro) {
 
@@ -105,10 +107,6 @@ public class Main {
                 System.out.println("Hora:  " + hora);
 
             }
-
-
-
-
 
         } catch (IOException e) {
             System.out.println("Error al leer el fichero " + e.getMessage());
@@ -150,6 +148,7 @@ public class Main {
             System.out.println("Error al escribir el fichero " + e.getMessage());
         }
 
+        //Para deserializar el fichero binario (.bin) que hemos creado:
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ruta4))) {
 
